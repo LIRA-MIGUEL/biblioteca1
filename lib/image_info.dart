@@ -30,125 +30,99 @@ class _imageInfoState extends State<imageInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Datos del libro",
-          style: TextStyle(color: Colors.green), // Cambiar el color del texto a verde
-        ),
+        title: const Text("Libros", style: TextStyle(color: Colors.red)),
         centerTitle: true,
-        backgroundColor: Colors.orange, // Cambiar el color de fondo a naranja
+        backgroundColor: Colors.green,
       ),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          const Center(
-            child: Text(
-              "Información del libro",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.green, // Cambiar el color del texto a verde
+      body: Container(
+        color: Colors.lightBlue, // Cambia el color de fondo aquí
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 50,
+            ),
+            const Center(
+              child: Text(
+                "Información del Libro",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: 100,
-                  height: 120,
-                  child: Utility.ImageFromBase64String(widget.photo!),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                Text(
-                  "Titulo ${widget.titulo}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "Autor/Autores: ${widget.autor}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "Editorial: ${widget.editorial}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "No. de Páginas: ${widget.paginas}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "Edición: ${widget.edicion}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  "ISBN: ${widget.isbn}",
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue, // Cambiar el color del texto a azul
-                  ),
-                ),
-              ],
+            const SizedBox(
+              height: 50,
             ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text("Regresar"),
-            style: ButtonStyle(
-              backgroundColor:
-              MaterialStateProperty.all(Colors.blue), // Cambiar el color del botón a azul
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    width: 170,
+                    height: 170,
+                    child: Utility.ImageFromBase64String(widget.photo!),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildFieldAndResponse("Título:", widget.titulo, Colors.greenAccent, Colors.black),
+                  _buildFieldAndResponse("Autor/Autores:", widget.autor, Colors.greenAccent, Colors.black),
+                  _buildFieldAndResponse("Editorial:", widget.editorial, Colors.greenAccent, Colors.black),
+                  _buildFieldAndResponse("No. de Páginas:", widget.paginas, Colors.greenAccent, Colors.black),
+                  _buildFieldAndResponse("Edición:", widget.edicion, Colors.greenAccent, Colors.black),
+                  _buildFieldAndResponse("ISBN:", widget.isbn, Colors.greenAccent, Colors.black)
+                ],
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Cambiar el color de fondo del botón
+                  onPrimary: Colors.black, // Cambiar el color del texto del botón
+                  minimumSize: const Size(150, 40), // Tamaño mínimo del botón
+                  textStyle: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: const Text("Regresar"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  Widget _buildFieldAndResponse(String field, String? response, Color fieldColor, Color responseColor) {
+    return Row(
+      children: [
+        Text(
+          "$field",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: fieldColor,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          response ?? "",
+          style: TextStyle(
+            fontSize: 20,
+            color: responseColor,
+          ),
+        ),
+      ],
+    );
+  }
 }
+
+

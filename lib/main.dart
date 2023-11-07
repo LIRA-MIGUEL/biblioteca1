@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: validate,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
-                      side: const BorderSide(color: Colors.black12)),
+                      side: const BorderSide(color: Colors.lightBlue)),
                   child: Text(isUpdating ? "Actualizar" : "Insertar"),
                 ),
                 MaterialButton(
@@ -352,7 +352,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         // Evitar botón de regreso
         automaticallyImplyLeading: false,
-        title: const Text('Libros'),
+        title: const Text('Menu Biblioteca'),
         centerTitle: true,
         actions: [
           IconButton(
